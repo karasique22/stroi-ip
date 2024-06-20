@@ -172,6 +172,11 @@
 	align-items: center;
 }
 
+.header_banner_item_img {
+	height: 100%;
+	width: auto;
+}
+
 .section {
 	padding: 60px 120px;
 }
@@ -466,7 +471,7 @@
 	grid-column: 6 / 11;
 }
 
-.footer_card img {
+.footer_card_img {
 	position: absolute;
 	top: 0;
 	left: 0;

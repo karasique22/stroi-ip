@@ -6,6 +6,7 @@ import ProjectCard from "./components/ProjectCard";
 import { services } from "./data/services";
 import { projects } from "./data/projects";
 import { useState, useEffect, MouseEventHandler } from "react";
+import Image from "next/image";
 
 export default function Home() {
 	const [isMobile, setIsMobile] = useState(false);
@@ -123,9 +124,9 @@ export default function Home() {
 	return (
 		<main className={styles.main}>
 			<header className={styles.header}>
-				<img
+				<Image
 					className={styles.header_logo}
-					src="/svg/logo.svg"
+					src="./svg/logo.svg"
 					alt="logo"
 					width={80}
 					height={80}
@@ -140,7 +141,13 @@ export default function Home() {
 					className={styles.mobile_menu_burger}
 					onClick={openMobileMenu}
 				>
-					<img src="/svg/burger-menu.svg" alt="menu" />
+					<Image
+						src="./svg/burger-menu.svg"
+						alt="Меню"
+						width={24}
+						height={24}
+						layout="responsive"
+					/>
 				</div>
 				<div className={styles.mobile_menu} id="mobile_menu">
 					<div onClick={scrollToSection("services")}>Услуги</div>
@@ -193,11 +200,23 @@ export default function Home() {
 							}
 						>
 							<div className={styles.header_banner_item}>
-								<img src="/svg/estimates.svg" alt="estimates" />
+								<Image
+									src="./svg/estimates.svg"
+									alt="estimates"
+									width={24}
+									height={24}
+									className={styles.header_banner_item_img}
+								/>
 								<p>Смета фиксируется в договоре</p>
 							</div>
 							<div className={styles.header_banner_item}>
-								<img src="/svg/contract.svg" alt="contract" />
+								<Image
+									src="./svg/contract.svg"
+									alt="contract"
+									width={24}
+									height={24}
+									className={styles.header_banner_item_img}
+								/>
 								<p>Гарантия в соответствии с законом</p>
 							</div>
 						</div>
@@ -471,7 +490,13 @@ export default function Home() {
 					<div
 						className={`${styles.footer_card_1} ${styles.footer_card}`}
 					>
-						<img src="/img/services/1.png" alt="" />
+						<Image
+							src="./img/services/1.png"
+							alt=""
+							width={24}
+							height={24}
+							className={styles.footer_card_img}
+						/>
 						<h2 className={styles.text_black}>Звоните</h2>
 						<h2 className={styles.text_black}>
 							+7 (902) 805-54-25
@@ -494,7 +519,13 @@ export default function Home() {
 					<div
 						className={`${styles.footer_card_2} ${styles.footer_card}`}
 					>
-						<img src="/img/services/2.png" alt="" />
+						<Image
+							src="./img/services/2.png"
+							alt=""
+							width={24}
+							height={24}
+							className={styles.footer_card_img}
+						/>
 						<h2 className={styles.text_black}>
 							Составляем подробную смету
 						</h2>
@@ -502,7 +533,13 @@ export default function Home() {
 					<div
 						className={`${styles.footer_card_3} ${styles.footer_card}`}
 					>
-						<img src="/img/services/3.png" alt="" />
+						<Image
+							src="./img/services/3.png"
+							alt=""
+							width={24}
+							height={24}
+							className={styles.footer_card_img}
+						/>
 						<h2 className={styles.text_black}>
 							Составляем договор
 						</h2>
@@ -524,13 +561,31 @@ export default function Home() {
 						</h2>
 						<div className={styles.footer_contacts_socials_icons}>
 							<a href="">
-								<img src="/svg/whatsApp.svg" alt="" />
+								<Image
+									src="./svg/whatsApp.svg"
+									alt=""
+									width={24}
+									height={24}
+									layout="responsive"
+								/>
 							</a>
 							<a href="">
-								<img src="/svg/telegram.svg" alt="" />
+								<Image
+									src="./svg/telegram.svg"
+									alt=""
+									width={24}
+									height={24}
+									layout="responsive"
+								/>
 							</a>
 							<a href="">
-								<img src="/svg/viber.svg" alt="" />
+								<Image
+									src="./svg/viber.svg"
+									alt=""
+									width={24}
+									height={24}
+									layout="responsive"
+								/>
 							</a>
 						</div>
 					</div>
