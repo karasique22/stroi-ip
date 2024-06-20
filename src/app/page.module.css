@@ -116,7 +116,7 @@
 	width: 100%;
 	height: 100%;
 	background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)),
-		url("/stroi-ip/img/banners/header-banner.png");
+		url("./img/banners/header-banner.png");
 	background-position: center;
 	/* background-repeat: repeat; */
 	background-size: cover;
@@ -402,7 +402,7 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: url("/stroi-ip/img/banners/about-us-banner.png");
+	background: url("./img/banners/about-us-banner.png");
 	background-position: center;
 	background-size: cover;
 	filter: contrast(75%) brightness(50%);
@@ -636,7 +636,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: url("/stroi-ip/img/banners/header-banner.png");
+		background: url("./img/banners/header-banner.png");
 		background-position: center;
 		filter: contrast(75%);
 		filter: brightness(10%);
