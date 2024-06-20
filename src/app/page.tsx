@@ -166,7 +166,15 @@ export default function Home() {
 
 			{/* TODO: fix hdp layout */}
 			<section className={styles.header_banner}>
-				<div className={styles.header_banner_background}></div>
+				<div className={styles.header_banner_background}>
+					<div className={styles.header_banner_overlay}></div>
+					<Image
+						src="./img/banners/header-banner.png"
+						alt="Фон"
+						width={80}
+						height={80}
+					/>
+				</div>
 				<div className={styles.header_banner_content}>
 					<div className={styles.header_banner_text}>
 						<h1
@@ -388,7 +396,12 @@ export default function Home() {
 			</section>
 
 			<section className={`${styles.section} ${styles.about}`} id="about">
-				<div className={styles.about_section_img} />
+				<Image
+					src={"./img/banners/about-us-banner.png"}
+					className={styles.about_section_img}
+					alt="О нас"
+					layout="fill"
+				/>
 				<div className={styles.section_title_block}>
 					<h2 className={styles.text_black}>
 						Больше, чем просто строители

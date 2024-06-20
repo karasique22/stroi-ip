@@ -103,24 +103,34 @@
 }
 
 .header_banner {
-	height: calc(100vh - 121px);
+	height: calc(100vh - 115px);
 	display: flex;
 	justify-content: end;
 	position: relative;
 }
 
-.header_banner_background {
+.header_banner_background img {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)),
-		url("./img/banners/header-banner.png");
-	background-position: center;
-	/* background-repeat: repeat; */
-	background-size: cover;
-	filter: contrast(75%);
+	object-fit: cover;
+	filter: contrast(85%);
+	z-index: -2;
+}
+
+.header_banner_overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(
+		to right,
+		rgba(0, 0, 0, 0) 0%,
+		rgba(0, 0, 0, 0.95) 100%
+	);
 	z-index: -1;
 }
 
@@ -402,11 +412,9 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: url("./img/banners/about-us-banner.png");
-	background-position: center;
-	background-size: cover;
 	filter: contrast(75%) brightness(50%);
 	z-index: -1;
+	object-fit: cover;
 }
 
 .about_numbers {
@@ -630,16 +638,13 @@
 		height: fit-content;
 	}
 
-	.header_banner-background {
+	.header_banner_background {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: url("./img/banners/header-banner.png");
-		background-position: center;
 		filter: contrast(75%);
-		filter: brightness(10%);
 		z-index: -1;
 	}
 
