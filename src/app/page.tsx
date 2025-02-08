@@ -303,7 +303,7 @@ export default function Home() {
 				className={`${styles.section} ${styles.target}`}
 				id="target"
 			>
-				<motion.divdiv className={styles.section_title_block}>
+				<motion.div className={styles.section_title_block}>
 					<div>
 						<h2 className={styles.text_black}>
 							Бесплатно подготовим для вас
@@ -318,7 +318,7 @@ export default function Home() {
 						Руководитель лично свяжется с вами, уточнит детали и
 						рассчитает смету
 					</h3>
-				</motion.divdiv>
+				</motion.div>
 				<form className={styles.target_form}>
 					<div className={styles.target_inputs}>
 						<input
