@@ -7,11 +7,12 @@ import { services } from "./data/services";
 import { projects } from "./data/projects";
 import { useState, useEffect, MouseEventHandler } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function Home() {
 	const [isMobile, setIsMobile] = useState(false);
 	const [visibleServicesCount, setVisibleServicesCount] = useState(3);
-	const [visibleProjectsCount, setVisibleProjectsCount] = useState(3);
+	const [servicesExtended, setServicesExtended] = useState(false)
 	const [phoneNumber, setPhoneNumber] = useState("");
 
 	useEffect(() => {
@@ -32,12 +33,9 @@ export default function Home() {
 		setVisibleServicesCount(3);
 	};
 
-	const showAllProjects = () => {
-		setVisibleProjectsCount(projects.length);
-	};
-
-	const hideProjects = () => {
-		setVisibleProjectsCount(3);
+	const toggleServices = () => {
+		setServicesExtended(!servicesExtended);
+		setVisibleServicesCount(servicesExtended ? 3 : services.length);
 	};
 
 	const formatRussianPhoneNumber = (input: string): string => {
@@ -94,16 +92,16 @@ export default function Home() {
 		(
 			sectionId: string
 		): MouseEventHandler<HTMLDivElement | HTMLButtonElement> =>
-		event => {
-			event.preventDefault();
-			const section = document.getElementById(sectionId);
-			if (section) {
-				window.scrollTo({
-					top: section.offsetTop + 1,
-					behavior: "smooth",
-				});
-			}
-		};
+			event => {
+				event.preventDefault();
+				const section = document.getElementById(sectionId);
+				if (section) {
+					window.scrollTo({
+						top: section.offsetTop + 1,
+						behavior: "smooth",
+					});
+				}
+			};
 
 	const openMobileMenu = () => {
 		const menu = document.querySelector("#mobile_menu") as HTMLElement;
@@ -128,8 +126,8 @@ export default function Home() {
 					className={styles.header_logo}
 					src="./svg/logo.svg"
 					alt="logo"
-					width={80}
-					height={80}
+					width={100}
+					height={100}
 				/>
 				<div className={styles.desktop_menu}>
 					<div onClick={scrollToSection("services")}>Услуги</div>
@@ -164,7 +162,6 @@ export default function Home() {
 				</div>
 			</header>
 
-			{/* TODO: fix hdp layout */}
 			<section className={styles.header_banner}>
 				<div className={styles.header_banner_background}>
 					<div className={styles.header_banner_overlay}></div>
@@ -258,7 +255,7 @@ export default function Home() {
 				</div>
 
 				{/* TODO: fix hide animation */}
-				<div className={styles.services_grid}>
+				<motion.div layout className={styles.services_grid}>
 					{services
 						.slice(
 							0,
@@ -272,25 +269,11 @@ export default function Home() {
 							/>
 						))}
 					{isMobile && (
-						<>
-							{visibleServicesCount < services.length ? (
-								<button
-									className={styles.primary_button}
-									onClick={showAllServices}
-								>
-									Посмотреть все
-								</button>
-							) : (
-								<button
-									className={styles.primary_button}
-									onClick={hideServices}
-								>
-									Скрыть
-								</button>
-							)}
-						</>
+						<button onClick={toggleServices} className={styles.primary_button}>
+							{servicesExtended ? "Скрыть" : "Показать все"}
+						</button>
 					)}
-				</div>
+				</motion.div>
 			</section>
 			<section className={styles.section} id="projects">
 				<div className={styles.section_title_block}>
@@ -304,13 +287,8 @@ export default function Home() {
 					</h3>
 				</div>
 
-				{/* TODO: fix layout */}
 				<div className={styles.projects}>
 					{projects
-						.slice(
-							0,
-							isMobile ? visibleProjectsCount : projects.length
-						)
 						.map((project, index) => (
 							<ProjectCard
 								key={index}
@@ -318,25 +296,6 @@ export default function Home() {
 								imageUrl={project.imageUrl}
 							/>
 						))}
-					{isMobile && (
-						<>
-							{visibleProjectsCount < projects.length ? (
-								<button
-									className={styles.primary_button}
-									onClick={showAllProjects}
-								>
-									Посмотреть все
-								</button>
-							) : (
-								<button
-									className={styles.primary_button}
-									onClick={hideProjects}
-								>
-									Скрыть
-								</button>
-							)}
-						</>
-					)}
 				</div>
 			</section>
 
@@ -344,7 +303,7 @@ export default function Home() {
 				className={`${styles.section} ${styles.target}`}
 				id="target"
 			>
-				<div className={styles.section_title_block}>
+				<motion.divdiv className={styles.section_title_block}>
 					<div>
 						<h2 className={styles.text_black}>
 							Бесплатно подготовим для вас
@@ -359,7 +318,7 @@ export default function Home() {
 						Руководитель лично свяжется с вами, уточнит детали и
 						рассчитает смету
 					</h3>
-				</div>
+				</motion.divdiv>
 				<form className={styles.target_form}>
 					<div className={styles.target_inputs}>
 						<input
@@ -385,10 +344,8 @@ export default function Home() {
 						<div className={styles.target_checkbox}>
 							<input type="checkbox" required />
 							<div className={styles.target_checkbox_text}>
-								Нажимая на кнопку, вы соглашаетесь с{" "}
-								<div className={styles.text_underline}>
-									политикой конфиденциальности
-								</div>
+								<a>Нажимая на кнопку, вы соглашаетесь с </a>
+								<a href=""><u>политикой конфиденциальности</u></a>
 							</div>
 						</div>
 					</div>
@@ -500,9 +457,8 @@ export default function Home() {
 					</div>
 				</div>
 				<div className={styles.footer_grid}>
-					<div
-						className={`${styles.footer_card_1} ${styles.footer_card}`}
-					>
+
+					<div className={`${styles.footer_card_1} ${styles.footer_card}`}>
 						<Image
 							src="./img/services/1.png"
 							alt=""
@@ -518,20 +474,22 @@ export default function Home() {
 							Ответим на все вопросы и проведем консультацию
 						</h3>
 					</div>
-					<div className={styles.footer_button}>
-						<h3 className={styles.text_regular}>
-							Или оставьте заявку на сайте
-						</h3>
-						<button
-							className={styles.primary_button}
-							onClick={scrollToSection("target")}
-						>
-							Оставить заявку
-						</button>
-					</div>
-					<div
-						className={`${styles.footer_card_2} ${styles.footer_card}`}
-					>
+					
+					{!isMobile && 
+						<div className={styles.footer_button}>
+							<h3 className={styles.text_regular}>
+								Или оставьте заявку на сайте
+							</h3>
+							<button
+								className={styles.primary_button}
+								onClick={scrollToSection("target")}
+							>
+								Оставить заявку
+							</button>
+						</div>
+					}
+
+					<div className={`${styles.footer_card_2} ${styles.footer_card}`}>
 						<Image
 							src="./img/services/2.png"
 							alt=""
@@ -543,9 +501,8 @@ export default function Home() {
 							Составляем подробную смету
 						</h2>
 					</div>
-					<div
-						className={`${styles.footer_card_3} ${styles.footer_card}`}
-					>
+
+					<div className={`${styles.footer_card_3} ${styles.footer_card}`}>
 						<Image
 							src="./img/services/3.png"
 							alt=""
@@ -557,15 +514,30 @@ export default function Home() {
 							Составляем договор
 						</h2>
 					</div>
+
+					{isMobile &&
+						<div className={styles.footer_button}>
+							<h3 className={styles.text_regular}>
+								Или оставьте заявку на сайте
+							</h3>
+							<button
+								className={styles.primary_button}
+								onClick={scrollToSection("target")}
+							>
+								Оставить заявку
+							</button>
+						</div>
+					}
+
 				</div>
 				<div className={styles.footer_contacts}>
 					<div className={styles.footer_contacts_mail}>
 						<h2 className={styles.text_black}>Пишите нам</h2>
 						<a
 							href="mailto:s.dudin72@mail.ru"
-							className={`${styles.text_light} ${styles.text_underline} ${styles.footer_contacts_mail_link}`}
+							className={`${styles.text_light} ${styles.footer_contacts_mail_link}`}
 						>
-							s.dudin72@mail.ru
+							<u>s.dudin72@mail.ru</u>
 						</a>
 					</div>
 					<div className={styles.footer_contacts_socials}>
@@ -602,6 +574,24 @@ export default function Home() {
 							</a>
 						</div>
 					</div>
+				</div>
+			</section>
+
+			<section className={`${styles.section} ${styles.footer_final}`}>
+				<Image
+					className={styles.header_logo}
+					src="./svg/logo.svg"
+					alt="logo"
+					width={100}
+					height={100}
+				/>
+				<div className={styles.final_footer_link_stack}>
+					<a href=""> <u>Политика конфиденциальности</u></a>
+					<a href=""> <u>Пользовательское соглашение</u></a>
+				</div>
+				<div className={styles.final_footer_link_stack}>
+					<a href="tel:++79028055425">+7(902)805-54-25</a>
+					<a href="mailto:s.dudin72@mail.ru">s.dudin72@mail.ru</a>
 				</div>
 			</section>
 		</main>
